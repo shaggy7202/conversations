@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "babel": "babel conversations/static/js/index.js -o conversations/static/compiled/main.bundle.js",
+    "babel": "babel js/index.js -o conversations/static/compiled/main.bundle.js",
     "webpack": "webpack"
   },
   "repository": {
@@ -24,5 +24,9 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "webpack": "^3.10.0"
+  },
+  "dependencies": {
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
   }
 }

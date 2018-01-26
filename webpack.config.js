@@ -2,7 +2,7 @@ var path = require('path');
 var webpack = require('webpack');
 
  module.exports = {
-     entry: './conversations/static/js/index.js',
+     entry: './js/index.js',
      output: {
          path: path.resolve(__dirname, 'conversations/static/compiled/'),
          filename: 'main.bundle.js'
