@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Menu from './components/menu.js';
+import Chat from './components/chat.js';
+
 
 ReactDOM.render(
-  <Menu />,
+  <Chat />,
   document.getElementById('app')
 );
