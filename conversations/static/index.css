@@ -7,8 +7,11 @@ h2{
 }
 
 .mdl-textfield {
-    border-top: 1px solid #c7c7c7;
     width: 100%;
+}
+
+textarea{
+    border-top: solid 1px #c7c7c7;
 }
 
 .mdl-list{

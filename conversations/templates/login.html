@@ -4,7 +4,7 @@
 
 {% block body %}
     <h2>Login</h2>
-    <form method="post" class="mdl-grid login-form">
+    <form method="post" class="mdl-grid login-form" action="{% url 'login' %}">
         <div class="mdl-cell--3-offset mdl-cell mdl-cell--6-col">
             {% csrf_token %}
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col ">

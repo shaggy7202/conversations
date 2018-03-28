@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.conf.urls import url
 from django.contrib.auth import views as auth_views
-
+from django.views.generic.base import RedirectView
 
 from conversations.views.index import IndexPageView
 from conversations.views.signup import SignupView
@@ -27,5 +27,6 @@ urlpatterns = [
     url(r'^logout/$', auth_views.logout,  {'template_name': 'login.html'}, name='logout'),
     url(r'^admin/', admin.site.urls),
     url(r'^signup/$', SignupView.as_view(), name='signup'),
+    url(r'^accounts/profile/$', RedirectView.as_view(url='/')),
     url(r'^$', IndexPageView.as_view(), name='index'),
 ]
