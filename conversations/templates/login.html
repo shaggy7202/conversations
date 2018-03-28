@@ -1,16 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Login</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block body %}
     <h2>Login</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Login</button>
+    <form method="post" class="mdl-grid login-form">
+        <div class="mdl-cell--3-offset mdl-cell mdl-cell--6-col">
+            {% csrf_token %}
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col ">
+                <input class="mdl-textfield__input" type="text" id="id_username" name="username" required>
+                <label class="mdl-textfield__label" for="id_username">Username</label>
+            </div>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
+                <input class="mdl-textfield__input" type="password" id="id_password" name="password" required>
+                <label class="mdl-textfield__label" for="id_password">Password</label>
+            </div>
+            <br>
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" type="submit">
+              Login
+            </button>
+            <a href="{% url 'signup' %}">Register</a>
+        </div>
     </form>
-    <a href="{% url 'signup' %}">Register</a>
-</body>
-</html>
+{% endblock %}

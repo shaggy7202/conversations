@@ -7765,6 +7765,7 @@ var Chat = function (_React$Component) {
         key: "sendMessage",
         value: function sendMessage() {
             this.state.socket.send($('textarea').val());
+            $('textarea').val('');
         }
     }, {
         key: "render",
@@ -7829,22 +7830,21 @@ var Message = exports.Message = function (_React$Component) {
         key: "render",
         value: function render() {
             return _react2.default.createElement(
-                "span",
-                { className: "mdl-list__item-primary-content" },
-                _react2.default.createElement(
-                    "i",
-                    { className: "material-icons mdl-list__item-avatar" },
-                    "person"
-                ),
+                "li",
+                { className: "mdl-list__item mdl-list__item--two-line" },
                 _react2.default.createElement(
                     "span",
-                    null,
-                    this.props.username
-                ),
-                _react2.default.createElement(
-                    "span",
-                    { className: "mdl-list__item-text-body" },
-                    this.props.text
+                    { className: "mdl-list__item-primary-content" },
+                    _react2.default.createElement(
+                        "span",
+                        null,
+                        this.props.username
+                    ),
+                    _react2.default.createElement(
+                        "span",
+                        { className: "mdl-list__item-sub-title" },
+                        this.props.text
+                    )
                 )
             );
         }

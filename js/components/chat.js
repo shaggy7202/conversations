@@ -20,7 +20,8 @@ export default class Chat extends React.Component {
   }
 
   sendMessage(){
-    this.state.socket.send($('textarea').val())
+    this.state.socket.send($('textarea').val());
+    $('textarea').val('');
   }
 
 
