@@ -7714,7 +7714,7 @@ module.exports = camelize;
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -7731,6 +7731,8 @@ var _button = __webpack_require__(30);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -7738,49 +7740,52 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var Chat = function (_React$Component) {
-  _inherits(Chat, _React$Component);
+    _inherits(Chat, _React$Component);
 
-  function Chat(props) {
-    _classCallCheck(this, Chat);
+    function Chat(props) {
+        _classCallCheck(this, Chat);
 
-    var _this = _possibleConstructorReturn(this, (Chat.__proto__ || Object.getPrototypeOf(Chat)).call(this, props));
+        var _this = _possibleConstructorReturn(this, (Chat.__proto__ || Object.getPrototypeOf(Chat)).call(this, props));
 
-    _this.state = { socket: new WebSocket("ws://" + window.location.host) };
-    return _this;
-  }
-
-  _createClass(Chat, [{
-    key: "sendMessage",
-    value: function sendMessage() {
-      this.state.socket.send($('textarea').val());
+        _this.state = {
+            socket: new WebSocket("ws://" + window.location.host),
+            messages: []
+        };
+        var self = _this;
+        _this.state.socket.onmessage = function (message) {
+            var data = JSON.parse(message.data);
+            Object.keys(data).forEach(function (key) {
+                self.setState({ messages: [].concat(_toConsumableArray(self.state.messages), [data[key]]) });
+            });
+        };
+        return _this;
     }
-  }, {
-    key: "createMessages",
-    value: function createMessages() {
-      var messages = [];
-      for (var message in window.props.messages) {
-        messages.append(_react2.default.createElement(_message.Message, { message: message }));
-      }
-      return messages;
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      return _react2.default.createElement(
-        "div",
-        null,
-        _react2.default.createElement(
-          "ul",
-          { className: "mdl-list" },
-          this.createMessages()
-        ),
-        _react2.default.createElement(_input.Input, null),
-        _react2.default.createElement(_button.Button, { onClick: this.sendMessage.bind(this) })
-      );
-    }
-  }]);
 
-  return Chat;
+    _createClass(Chat, [{
+        key: "sendMessage",
+        value: function sendMessage() {
+            this.state.socket.send($('textarea').val());
+        }
+    }, {
+        key: "render",
+        value: function render() {
+            return _react2.default.createElement(
+                "div",
+                null,
+                _react2.default.createElement(
+                    "ul",
+                    { className: "mdl-list" },
+                    this.state.messages.map(function (item) {
+                        return _react2.default.createElement(_message.Message, { username: item.username, text: item.text });
+                    })
+                ),
+                _react2.default.createElement(_input.Input, null),
+                _react2.default.createElement(_button.Button, { onClick: this.sendMessage.bind(this) })
+            );
+        }
+    }]);
+
+    return Chat;
 }(_react2.default.Component);
 
 exports.default = Chat;
@@ -7834,12 +7839,12 @@ var Message = exports.Message = function (_React$Component) {
                 _react2.default.createElement(
                     "span",
                     null,
-                    this.props.message.user
+                    this.props.username
                 ),
                 _react2.default.createElement(
                     "span",
                     { className: "mdl-list__item-text-body" },
-                    this.props.message.text
+                    this.props.text
                 )
             );
         }
